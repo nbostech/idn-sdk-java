@@ -1,12 +1,25 @@
+
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: 'idea'
+apply plugin: 'jvm-component'
+apply plugin: 'java-lang'
+
 group 'in.wavelabs'
 version '1.0'
 
-apply plugin: 'java'
+allprojects {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
 
-sourceCompatibility = 1.7
 repositories {
     jcenter()
+    mavenCentral()
 }
+
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
@@ -21,6 +34,185 @@ dependencies {
     compile 'io.swagger:swagger-parser:1.0.20'
     compile 'in.wavelabs:api-model:0.2.2'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.1'
-
-
 }
+////
+model {
+    tasks.generatePomFileForApiClientPublication {
+        destination = file("$buildDir/java-api-client-${version}.pom")
+    }
+}
+
+//
+//
+ext {
+    apiClientPomFile = file("${project.projectDir}/build/java-api-client-${version}.pom")
+    signedApiClientPomFile = file("${project.projectDir}/build/java-api-client-${version}.asc")
+}
+
+// avoids duplicates in a jar file
+tasks.withType(Jar) {
+    eachFile {
+        it.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
+}
+//
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
+task apiClientDocs(type: Javadoc) {
+    source = sourceSets.main.java
+}
+
+task apiClientJar(type: Jar, dependsOn:[classes]){
+    baseName = 'java-api-client'
+    from sourceSets.main.output
+}
+
+task apiClientSourceJar(type: Jar){
+    baseName = 'java-api-client-sources'
+    from(sourceSets.main.java)
+}
+
+task apiClientDocsJar(type: Jar, dependsOn: apiClientDocs) {
+    baseName = 'java-api-client-javadoc'
+    from apiClientDocs.destinationDir
+}
+//
+signing {
+    sign apiClientJar
+    sign apiClientSourceJar
+    sign apiClientDocsJar
+}
+
+task signApiClientPomFile(type:Sign){
+    sign project.ext.apiClientPomFile
+}
+
+def signedFiles = {
+    ["signApiClientJar","signApiClientSourceJar","signApiClientDocsJar"].collectMany {
+        project.tasks."${it}".signatureFiles.collect { it }
+    }
+}
+//
+def appendDependencies = { pomNode ->
+    def dependenciesNode = pomNode.getAt("dependencies")
+
+    if(dependenciesNode) { dependenciesNode=dependenciesNode[0] }
+    else { dependenciesNode = pomNode.appendNode('dependencies') }
+
+    //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+    configurations.compile.allDependencies.each {
+        def dependencyNode = dependenciesNode.appendNode('dependency')
+        dependencyNode.appendNode('groupId', it.group)
+        dependencyNode.appendNode('artifactId', it.name)
+        dependencyNode.appendNode('version', it.version)
+    }
+}
+//
+publishing {
+    publications {
+        apiClient(MavenPublication) {
+            artifactId 'java-api-client'
+            artifact(apiClientJar) {
+            }
+            artifact(apiClientSourceJar) {
+                classifier "sources"
+            }
+            artifact(apiClientDocsJar) {
+                classifier "javadoc"
+            }
+            signedFiles().each { signedFile ->
+                artifact (signedFile) {
+                    def fileName=signedFile.name
+                    classifier = fileName.contains("-sources") ? "sources" : (fileName.contains("-javadoc")?'javadoc':null)
+                    extension  = 'jar.asc'
+                }
+            }
+            def signedPomFile = file("${project.projectDir}/build/java-api-client-${version}.pom.asc")
+            if(signedPomFile) {
+                artifact(signedPomFile) {
+                    classifier = null
+                    extension  = 'pom.asc'
+                }
+            }
+            pom.withXml {
+                def node = asNode()
+                node.children().last() + {
+                    resolveStrategy = Closure.DELEGATE_FIRST
+                    name 'WaveLabs Java Client API'
+                    description 'description for project'
+                    url 'https://github.com/nbostech/wavelabs-java-client-api'
+                    scm {
+                        url 'https://github.com/nbostech/wavelabs-java-client-api'
+                        connection 'https://github.com/nbostech/wavelabs-java-client-api'
+                        developerConnection 'https://github.com/nbostech/wavelabs-java-client-api'
+                    }
+                    licenses {
+                        license {
+                            name 'The Apache Software License, Version 2.0'
+                            url 'http://www.apache.org/license/LICENSE-2.0.txt'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'vineeln'
+                            name 'Vineel Nalla'
+                            email 'vineeln@nbostech.com'
+                        }
+                        developer {
+                            id 'vivekkiran'
+                            name 'Vivek Kiran'
+                            email 'vivek.kiran@outlook.com'
+                        }
+                    }
+                }
+                appendDependencies(node)
+            }
+
+        }
+    }
+    repositories {
+        maven {
+            name 'maven2'
+            credentials {
+                username = "wavelabs"
+                password = "Zq952FI6o7Pz"
+            }
+            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+        }
+        maven {
+            name 'projRepo'
+            url "file:/${project.projectDir}/build/repo"
+        }
+        maven {
+            name 'nbosMaven'
+            //url "http://nexus1.nbostech.com:8081/nexus/content/repositories/wavelabs"
+            url "http://nexus1.nbostech.com:8081/nexus/content/repositories/wavelabs-snapshot"
+            credentials {
+                username = "admin"
+                password = "admin123"
+            }
+        }
+    }
+}
+//
+//
+task myTask << {
+    signedFiles().each {
+        println "signedfile: ${it}"
+    }
+}
+//
+//task getDeps(type: Copy) {
+//    from configurations.runtime
+//    into 'runtime/'
+//}
