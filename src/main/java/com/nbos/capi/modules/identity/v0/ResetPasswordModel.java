@@ -1,9 +1,9 @@
-package in.wavelabs.idn.DataModel.auth;
+package com.nbos.capi.modules.identity.v0;
 
 /**
  * Created by vineelanalla on 14/01/16.
  */
-public class Reset {
+public class ResetPasswordModel {
     public void setEmail(String email) {
         this.email = email;
     }

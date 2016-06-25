@@ -2,8 +2,6 @@ package com.nbos.capi.api.v0;
 
 import java.io.IOException;
 
-import in.wavelabs.idn.ConnectionAPI.NetworkCallback;
-import in.wavelabs.idn.utils.Constants;
 import io.swagger.models.Swagger;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -117,8 +115,10 @@ public class NetworkApi {
     }
 
     protected Retrofit getRetrofitClient(){
+        // TODO: get the host based on swagger
+        String host = AbstractApiContext.getApiContext().getHost(moduleName);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.MAIN)
+                .baseUrl(host)
                 .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

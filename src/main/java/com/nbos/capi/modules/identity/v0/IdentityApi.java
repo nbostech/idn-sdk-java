@@ -10,6 +10,11 @@ import retrofit2.Response;
 
 
 public class IdentityApi extends NetworkApi {
+    public IdentityApi() {
+        super();
+        setModuleName("identity");
+        setRemoteApiClass(IdentityRemoteApi.class);
+    }
     public TokenApiModel getToken(){
         return null;
     }
@@ -17,8 +22,8 @@ public class IdentityApi extends NetworkApi {
     public NewMemberApiModel login(LoginModel loginModel, final IdnCallback<NewMemberApiModel> callback) {
 
         IdentityRemoteApi identityRemoteApi = getRemoteApi();
-        TokenApiModel tokenApiModel = AbstractApiContext.getApiContext().getToken("client");
-        Call<NewMemberApiModel> call = identityRemoteApi.login(tokenApiModel.getAccess_token(),loginModel);
+      //  TokenApiModel tokenApiModel = AbstractApiContext.getApiContext().getToken("client");
+        Call<NewMemberApiModel> call = identityRemoteApi.login("sample",loginModel);
 
         NewMemberApiModel member=null;
         call.enqueue(new Callback<NewMemberApiModel>() {

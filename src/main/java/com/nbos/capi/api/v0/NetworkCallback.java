@@ -1,11 +1,9 @@
-package in.wavelabs.idn.ConnectionAPI;
-
+package com.nbos.capi.api.v0;
 
 import okhttp3.Call;
 import okhttp3.Response;
-
 /**
- * Created by vivekkiran on 6/15/16.
+ * Created by vivekkiran on 6/25/16.
  */
 
 public interface NetworkCallback {

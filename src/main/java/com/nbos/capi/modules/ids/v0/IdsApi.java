@@ -1,7 +1,6 @@
 package com.nbos.capi.modules.ids.v0;
 
 import com.nbos.capi.api.v0.AbstractApiContext;
-import com.nbos.capi.api.v0.ApiContext;
 import com.nbos.capi.api.v0.NetworkApi;
 
 /**
@@ -10,7 +9,9 @@ import com.nbos.capi.api.v0.NetworkApi;
 
 public class IdsApi extends NetworkApi {
     public IdsApi(){
-        setHost(AbstractApiContext.getApiContext().getHost());
+        super();
+        setRemoteApiClass(IdsRemoteApi.class);
+        setModuleName("ids");
     }
     // the wrapper methods to call IdsRemoteApi
     public IdsApi(String host) {

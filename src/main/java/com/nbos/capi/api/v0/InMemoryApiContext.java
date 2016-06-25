@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class InMemoryApiContext implements ApiContext {
 
     HashMap<String,Object> store = new HashMap<>();
+    HashMap<String,String> hosts = new HashMap<>();
 
     @Override
     public Object get(String context) {
@@ -31,13 +32,13 @@ public class InMemoryApiContext implements ApiContext {
     }
 
     @Override
-    public void setHost(String host) {
-        set("api.host",host);
+    public void setHost(String moduleName, String host) {
+        set("api.host."+moduleName,host);
     }
 
     @Override
-    public String getHost() {
-        return (String)get("api.host");
+    public String getHost(String moduleName) {
+        return (String)get("api.host."+moduleName);
     }
 
 }

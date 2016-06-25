@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import in.wavelabs.idn.modules.ids.IdsApi;
-import in.wavelabs.idn.utils.Constants;
 import io.swagger.models.Swagger;
 import io.swagger.parser.Swagger20Parser;
 import okhttp3.OkHttpClient;
@@ -60,6 +58,7 @@ public class IDS {
     }
 
     public static <Any> Any getModuleApi(String moduleName) {
+        System.out.println(registry);
         Class apiClass = (Class)registry.get(moduleName);
         if( apiClass == null ) {
             try {
@@ -67,7 +66,7 @@ public class IDS {
                 try {
                     NetworkApi api = (NetworkApi)apiClass.newInstance();
                     // TODO: we should get the host from IDS interface for the module
-                    api.setHost(Constants.MAIN);
+                    api.setHost("http://api.qa1.nbos.in/");
                     return (Any)api;
                 } catch( Exception x ) {
                   //  Log.i("IDS","unable to instantiate new object");
@@ -77,9 +76,18 @@ public class IDS {
             }
         }
         if( apiClass != null ) {
-           getHostForModule(moduleName);
+            //getHostForModule(moduleName);
             try {
-                return (Any)getRetrofitClient().create(apiClass);
+                try {
+                    NetworkApi api = (NetworkApi)apiClass.newInstance();
+                    return (Any)api;
+                    // TODO: we should get the host from IDS interface for the module
+                    //api.setHost("http://api.qa1.nbos.in/");
+                } catch( Exception x ) {
+                    //  Log.i("IDS","unable to instantiate new object");
+                }
+
+
             } catch( Exception x ) {
               //  Log.i("IDS","unable to instantiate new object");
             }
@@ -90,8 +98,8 @@ public class IDS {
     public static String getHostForModule(String moduleName){
         //TODO: Get Host From Module Name
         final String[] host = new String[1];
-        IdsApi idsApi = IDS.getIDSApi();
-        idsApi.getModApiJson(moduleName).enqueue(new Callback<ResponseBody>() {
+        IdsRemoteApi idsRemoteApi = IDS.getIDSApi();
+        idsRemoteApi.getModApiJson(moduleName).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                System.out.println(response);
@@ -120,7 +128,7 @@ public class IDS {
 
     protected static Retrofit getRetrofitClient(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.MAIN)
+                .baseUrl("http://api.qa1.nbos.in/")
                 .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -135,19 +143,5 @@ public class IDS {
         registry.put(moduleName,clazz);
     }
 
-    private static void setupRestClient(Class type) {
 
-
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.MAIN)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        apiClients.put(type, retrofit.create(type));
-
-    }
 }

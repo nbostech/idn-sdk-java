@@ -8,15 +8,15 @@ public interface ApiContext {
     /**
      * setToken()
      * getToken()
-     * getHost()
+     * getIdnHost()
      * setHost()
      */
 
     void setToken(String context,TokenApiModel tokenApiModel);
     TokenApiModel getToken(String context);
 
-    void setHost(String host);
-    String getHost();
+    void setHost(String moduleName,String host);
+    String getHost(String moduleName);
 
 
     /*

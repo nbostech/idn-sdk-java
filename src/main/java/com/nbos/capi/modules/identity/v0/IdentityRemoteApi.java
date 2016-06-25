@@ -1,9 +1,7 @@
 package com.nbos.capi.modules.identity.v0;
 
-import com.nbos.capi.api.v0.*;
 import com.nbos.capi.api.v0.TokenApiModel;
 
-import in.wavelabs.idn.DataModel.auth.SignUp;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;

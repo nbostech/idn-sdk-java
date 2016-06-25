@@ -2,10 +2,10 @@ package com.nbos.capi.modules.ids.v0;
 
 
 import com.nbos.capi.api.v0.NetworkApi;
+import com.nbos.capi.api.v0.NetworkCallback;
 import com.nbos.capi.api.v0.TokenApiModel;
+import com.nbos.capi.modules.identity.v0.IdentityApi;
 
-import in.wavelabs.idn.ConnectionAPI.NetworkCallback;
-import in.wavelabs.idn.modules.identity.IdentityApi;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -35,19 +35,19 @@ public class IDSClient {
             }
         });
 
-        IdentityApi identityApi = IDS.getModuleApi("identity");
-        identityApi.getToken("","","").enqueue(new Callback<TokenApiModel>() {
-            @Override
-            public void onResponse(retrofit2.Call<TokenApiModel> call, retrofit2.Response<TokenApiModel> response) {
-                //nbosCallback.onResponse(response);
-             //   Log.i("IDSClient","token received response");
-            }
-
-            @Override
-            public void onFailure(retrofit2.Call<TokenApiModel> call, Throwable t) {
-               // Timber.i("IDSClient","token failure");
-            }
-        });
+//        IdentityApi identityApi = IDS.getModuleApi("identity");
+//        identityApi.getToken("","","").enqueue(new Callback<TokenApiModel>() {
+//            @Override
+//            public void onResponse(retrofit2.Call<TokenApiModel> call, retrofit2.Response<TokenApiModel> response) {
+//                //nbosCallback.onResponse(response);
+//             //   Log.i("IDSClient","token received response");
+//            }
+//
+//            @Override
+//            public void onFailure(retrofit2.Call<TokenApiModel> call, Throwable t) {
+//               // Timber.i("IDSClient","token failure");
+//            }
+//        });
 
     }
 }
