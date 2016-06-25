@@ -1,4 +1,4 @@
-package in.wavelabs.idn.DataModel.ids;
+package com.nbos.capi.modules.ids.v0;
 
 /**
  * Created by vivekkiran on 6/17/16.

@@ -1,9 +1,8 @@
 package in.wavelabs.idn.modules.ids;
 
-import in.wavelabs.idn.DataModel.ids.IdsApiModel;
+import com.nbos.capi.modules.ids.v0.IdsApiModel;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 

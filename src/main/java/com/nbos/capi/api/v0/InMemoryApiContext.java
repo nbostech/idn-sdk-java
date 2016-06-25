@@ -27,7 +27,7 @@ public class InMemoryApiContext implements ApiContext {
 
     @Override
     public TokenApiModel getToken(String context) {
-        return (TokenApiModel)get("token."+context);;
+        return (TokenApiModel)get("token."+context);
     }
 
     @Override
