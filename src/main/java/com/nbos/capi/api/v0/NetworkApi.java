@@ -30,12 +30,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class NetworkApi {
 
-
     String moduleName;
     String host;
     Swagger sw;
-
-
 
     Class<?> remoteApiClass;
     Object remoteApi;

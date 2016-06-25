@@ -10,9 +10,6 @@ public interface ApiContext {
      * getToken()
      * getHost()
      * setHost()
-     *
-     * @param property
-     * @param value
      */
 
     void setToken(String context,TokenApiModel tokenApiModel);
