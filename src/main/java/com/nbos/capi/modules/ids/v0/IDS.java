@@ -1,16 +1,14 @@
-package in.wavelabs.ids;
+package com.nbos.capi.modules.ids.v0;
 
+
+import com.nbos.capi.api.v0.NetworkApi;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-import in.wavelabs.idn.ConnectionAPI.service.StarterApi;
-import in.wavelabs.idn.DataModel.ids.IdsApiModel;
-import in.wavelabs.idn.modules.identity.IdentityApi;
 import in.wavelabs.idn.modules.ids.IdsApi;
 import in.wavelabs.idn.utils.Constants;
 import io.swagger.models.Swagger;
@@ -65,7 +63,7 @@ public class IDS {
         Class apiClass = (Class)registry.get(moduleName);
         if( apiClass == null ) {
             try {
-                apiClass = Class.forName("in.wavelabs.ids.NetworkApi");
+                apiClass = Class.forName("com.nbos.capi.api.v0.NetworkApi");
                 try {
                     NetworkApi api = (NetworkApi)apiClass.newInstance();
                     // TODO: we should get the host from IDS interface for the module

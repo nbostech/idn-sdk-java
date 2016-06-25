@@ -20,6 +20,11 @@ import retrofit2.Response;
  */
 public class AuthApi {
 
+    class IdentityApi {
+        public void resetPassword() {
+
+        }
+    }
 
     public static void resetPassword(String email, String clientToken, final NBOSCallback<RestMessage> nbosCallback) {
         Reset rb = new Reset();

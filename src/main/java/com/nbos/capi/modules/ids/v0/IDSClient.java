@@ -1,20 +1,14 @@
-package in.wavelabs.ids;
+package com.nbos.capi.modules.ids.v0;
 
 
-import com.nbos.capi.modules.identity.v0.TokenApiModel;
-import com.nbos.capi.modules.media.v0.MediaApiModel;
+import com.nbos.capi.api.v0.NetworkApi;
+import com.nbos.capi.api.v0.TokenApiModel;
 
-import java.io.IOException;
-
-import in.wavelabs.idn.ConnectionAPI.OkHttpNBOSCallback;
-import in.wavelabs.idn.ConnectionAPI.service.StarterClient;
+import in.wavelabs.idn.ConnectionAPI.NetworkCallback;
 import in.wavelabs.idn.modules.identity.IdentityApi;
 import okhttp3.Call;
-import okhttp3.MediaType;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
-import okio.BufferedSink;
 import retrofit2.Callback;
 
 /**
@@ -28,7 +22,7 @@ public class IDSClient {
         NetworkApi networkApi = IDS.getModuleApi("networkapi");
         Request request = networkApi.newRequest("/oauth/token")
                 .build();
-        networkApi.get(request, new OkHttpNBOSCallback() {
+        networkApi.get(request, new NetworkCallback() {
             @Override
             public void onResponse(Call call, Response response) {
 

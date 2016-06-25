@@ -1,9 +1,8 @@
 package in.wavelabs.idn.modules.identity;
 
-import com.nbos.capi.modules.identity.v0.TokenApiModel;
+import com.nbos.capi.api.v0.TokenApiModel;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;

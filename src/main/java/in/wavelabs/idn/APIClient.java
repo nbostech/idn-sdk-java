@@ -1,6 +1,6 @@
 package in.wavelabs.idn;
 
-import com.nbos.capi.modules.identity.v0.TokenApiModel;
+import com.nbos.capi.api.v0.TokenApiModel;
 import in.wavelabs.idn.ConnectionAPI.NBOSCallback;
 import in.wavelabs.idn.ConnectionAPI.service.StarterClient;
 import retrofit2.Call;

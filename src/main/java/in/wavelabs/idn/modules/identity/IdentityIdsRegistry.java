@@ -1,6 +1,6 @@
 package in.wavelabs.idn.modules.identity;
 
-import in.wavelabs.ids.IDS;
+import com.nbos.capi.modules.ids.v0.IDS;
 
 /**
  * Created by vivekkiran on 6/16/16.
