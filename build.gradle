@@ -133,7 +133,7 @@ publishing {
             pom.withXml {
                 def node = asNode()
                 node.children().last() + {
-                    resolveStrategy = Closure.DELEGATE_FIRST
+                    resolveStrategy = DELEGATE_FIRST
                     name 'WaveLabs Java Client API'
                     description 'description for project'
                     url 'https://github.com/nbostech/wavelabs-java-client-api'
