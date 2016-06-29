@@ -43,5 +43,5 @@ public interface IdsRemoteApi {
     //Get Tenants open for biz
     String modTnts = "/ids/v0/tenants/{moduleName}";
     @GET(modTnts)
-    Call<IdsApiModel>  getModTnts(@Path("moduleName")String moduleName);
+    Call<IdsApiModel>  getModTnts(@Path("moduleName") String moduleName);
 }

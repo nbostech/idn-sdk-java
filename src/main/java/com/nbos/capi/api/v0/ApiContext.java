@@ -1,5 +1,7 @@
 package com.nbos.capi.api.v0;
 
+import java.util.Map;
+
 /**
  * Created by vivekkiran on 6/23/16.
  */
@@ -12,11 +14,14 @@ public interface ApiContext {
      * setHost()
      */
 
-    void setToken(String context,TokenApiModel tokenApiModel);
+    void setToken(String context, TokenApiModel tokenApiModel);
     TokenApiModel getToken(String context);
 
-    void setHost(String moduleName,String host);
+    void setHost(String moduleName, String host);
     String getHost(String moduleName);
+
+    Map getClientCredentials();
+    void setClientCredentials(Map map);
 
 
     /*

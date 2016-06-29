@@ -3,13 +3,10 @@ package com.nbos.capi.modules.ids.v0;
 
 import com.nbos.capi.api.v0.NetworkApi;
 import com.nbos.capi.api.v0.NetworkCallback;
-import com.nbos.capi.api.v0.TokenApiModel;
-import com.nbos.capi.modules.identity.v0.IdentityApi;
 
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Callback;
 
 /**
  * Created by vivekkiran on 6/16/16.

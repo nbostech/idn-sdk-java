@@ -1,6 +1,5 @@
 package com.nbos.capi.modules.ids.v0;
 
-import com.nbos.capi.api.v0.AbstractApiContext;
 import com.nbos.capi.api.v0.NetworkApi;
 
 /**

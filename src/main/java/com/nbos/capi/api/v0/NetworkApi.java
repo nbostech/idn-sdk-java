@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 /**
  *    -
- *    com.nbos.capi.modules.ids.v0
+ *    com.nbos.com.nbos.capi.modules.ids.v0
  IdsApi extends NetworkApi
  IdsRemoteApi
  -- necessary Ids models --
@@ -116,7 +116,7 @@ public class NetworkApi {
 
     protected Retrofit getRetrofitClient(){
         // TODO: get the host based on swagger
-        String host = AbstractApiContext.getApiContext().getHost(moduleName);
+        String host = AbstractApiContext.get().getHost(moduleName);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(host)
                 .client(getOkHttpClient())

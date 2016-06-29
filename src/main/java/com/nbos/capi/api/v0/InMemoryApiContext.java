@@ -1,6 +1,7 @@
 package com.nbos.capi.api.v0;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by vivekkiran on 6/23/16.
@@ -10,6 +11,17 @@ public class InMemoryApiContext implements ApiContext {
 
     HashMap<String,Object> store = new HashMap<>();
     HashMap<String,String> hosts = new HashMap<>();
+
+    @Override
+    public Map getClientCredentials() {
+        return (Map)store.get("client.credentials");
+    }
+
+    @Override
+    public void setClientCredentials(Map map) {
+        store.put("client.credentials",map);
+    }
+
 
     @Override
     public Object get(String context) {

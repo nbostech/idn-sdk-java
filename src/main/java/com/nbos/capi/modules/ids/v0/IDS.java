@@ -62,7 +62,7 @@ public class IDS {
         Class apiClass = (Class)registry.get(moduleName);
         if( apiClass == null ) {
             try {
-                apiClass = Class.forName("com.nbos.capi.api.v0.NetworkApi");
+                apiClass = Class.forName("com.nbos.com.nbos.capi.api.v0.NetworkApi");
                 try {
                     NetworkApi api = (NetworkApi)apiClass.newInstance();
                     // TODO: we should get the host from IDS interface for the module
