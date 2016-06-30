@@ -13,6 +13,8 @@ public class InMemoryApiContext implements ApiContext {
     HashMap<String,String> hosts = new HashMap<>();
 
     @Override
+    public void init() {}
+    @Override
     public Map getClientCredentials() {
         return (Map)store.get("client.credentials");
     }
@@ -22,6 +24,11 @@ public class InMemoryApiContext implements ApiContext {
         store.put("client.credentials",map);
     }
 
+    public void setClientToken(TokenApiModel tokenApiModel) { store.put("token.client",tokenApiModel);}
+    public TokenApiModel getClientToken() { return (TokenApiModel)store.get("token.client");}
+
+    public void setUserToken(TokenApiModel tokenApiModel) { store.put("token.user",tokenApiModel); }
+    public TokenApiModel getUserToken() { return (TokenApiModel)store.get("token.user"); }
 
     @Override
     public Object get(String context) {

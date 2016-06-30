@@ -14,14 +14,22 @@ public interface ApiContext {
      * setHost()
      */
 
+    void init();
     void setToken(String context, TokenApiModel tokenApiModel);
     TokenApiModel getToken(String context);
 
     void setHost(String moduleName, String host);
     String getHost(String moduleName);
 
-    Map getClientCredentials();
+
     void setClientCredentials(Map map);
+    void setClientToken(TokenApiModel tokenApiModel);
+
+    Map getClientCredentials();
+    TokenApiModel getClientToken();
+
+    void setUserToken(TokenApiModel tokenApiModel);
+    TokenApiModel getUserToken();
 
 
     /*

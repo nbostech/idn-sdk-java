@@ -7,6 +7,9 @@ package com.nbos.capi.api.v0;
 public class IdnSDK {
     public static final void init(ApiContext apiContext){
         AbstractApiContext.registerApiContext(apiContext);
+        if(apiContext!=null) {
+            apiContext.init();
+        }
         try {
             Class.forName("com.nbos.capi.modules.identity.v0.IdentityIdsRegistry");
         } catch(Exception e) {
