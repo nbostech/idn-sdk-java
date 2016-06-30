@@ -105,11 +105,13 @@ public class IdentityApi extends NetworkApi {
 
         NewMemberApiModel member=null;
         call.enqueue(new Callback<NewMemberApiModel>() {
-
             @Override
             public void onResponse(Call<NewMemberApiModel> call, Response<NewMemberApiModel> response) {
+                if(response.code()==200) {
+                    NewMemberApiModel newMemberApiModel = response.body();
+                    AbstractApiContext.get().setUserToken(newMemberApiModel.getToken());
+                }
                 callback.onResponse(response);
-                //member = response.body();
             }
 
             @Override
