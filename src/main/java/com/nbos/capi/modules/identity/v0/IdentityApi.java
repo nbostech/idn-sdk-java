@@ -22,8 +22,8 @@ public class IdentityApi extends NetworkApi {
     }
 
     public TokenApiModel getClientToken() {
-        IdentityApi identityApi = IDS.getModuleApi("identity");
-        final IdentityRemoteApi remoteApi = identityApi.getRemoteApi();
+        final IdentityRemoteApi remoteApi = getRemoteApi();
+
         Map map = AbstractApiContext.get().getClientCredentials();
         String clientId = (String)map.get("client_id");
         String secret = (String)map.get("client_secret");

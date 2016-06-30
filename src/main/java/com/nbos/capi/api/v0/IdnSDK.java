@@ -1,5 +1,8 @@
 package com.nbos.capi.api.v0;
 
+import com.nbos.capi.modules.identity.v0.IdentityApi;
+import com.nbos.capi.modules.ids.v0.IDS;
+
 /**
  * Created by vivekkiran on 6/27/16.
  */
@@ -15,5 +18,7 @@ public class IdnSDK {
         } catch(Exception e) {
             System.out.println("unable to load");
         }
+        IdentityApi identityApi = IDS.getModuleApi("identity");
+        identityApi.getClientToken();
     }
 }
