@@ -34,7 +34,6 @@ public interface IdentityRemoteApi {
     String changeUrl  =baseIdentityUrl + "/auth/changePassword";
     String logoutUrl = baseIdentityUrl + "/auth/logout";
     String socialLoginUrl = baseIdentityUrl + "/auth/social/{loginService}/login";
-    String mediaUrl = "/api/media/v0/media";
 
 
     @FormUrlEncoded
@@ -70,13 +69,6 @@ public interface IdentityRemoteApi {
 
     @GET(profileUrl)
     Call<MemberApiModel> getProfile(@Header("Authorization") String authorization, @Path("uuid") String uuid);
-
-    @GET(mediaUrl)
-    Call<MediaApiModel> media(@Header("Authorization") String authorization, @Query("id") String uuid, @Query("mediafor") String mediafor);
-
-    @Multipart
-    @POST(mediaUrl)
-    Call<RestMessage> uploadMedia(@Header("Authorization") String authorization, @PartMap Map<String, RequestBody> params);
 
     @PUT(profileUrl)
     Call<MemberApiModel> updateProfile(@Header("Authorization") String authorization, @Path("uuid") String uuid, @Body MemberApiModel memberApiModel);

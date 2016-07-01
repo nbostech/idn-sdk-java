@@ -194,7 +194,7 @@ public class IdentityApi extends NetworkApi {
     }
     public MemberApiModel getProfile(String uuid, final IdnCallback<MemberApiModel> callback) {
         IdentityRemoteApi identityRemoteApi = getRemoteApi();
-        TokenApiModel tokenApiModel = AbstractApiContext.get().getClientToken();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
         Call<MemberApiModel> call = identityRemoteApi.getProfile("Bearer " + tokenApiModel.getAccess_token(),uuid);
 
         MemberApiModel member=null;
