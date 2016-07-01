@@ -145,4 +145,51 @@ public class IdentityApi extends NetworkApi {
         });
         return member;
     }
+    public NewMemberApiModel connect(SocialConnectApiModel socialConnectApiModel, String connectService, final IdnCallback<NewMemberApiModel> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getClientToken();
+        Call<NewMemberApiModel> call = identityRemoteApi.connect("Bearer " + tokenApiModel.getAccess_token(), connectService, socialConnectApiModel);
+
+        NewMemberApiModel member=null;
+        call.enqueue(new Callback<NewMemberApiModel>() {
+            @Override
+            public void onResponse(Call<NewMemberApiModel> call, Response<NewMemberApiModel> response) {
+                if(response.code()==200) {
+                    NewMemberApiModel newMemberApiModel = response.body();
+                    AbstractApiContext.get().setUserToken(newMemberApiModel.getToken());
+                }
+                callback.onResponse(response);
+            }
+
+            @Override
+            public void onFailure(Call<NewMemberApiModel> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
+    }
+    public NewMemberApiModel authorize(String authorizeService, String code, String state, final IdnCallback<NewMemberApiModel> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getClientToken();
+        Call<NewMemberApiModel> call = identityRemoteApi.authorize("Bearer " + tokenApiModel.getAccess_token(),authorizeService,code,state);
+
+        NewMemberApiModel member=null;
+        call.enqueue(new Callback<NewMemberApiModel>() {
+            @Override
+            public void onResponse(Call<NewMemberApiModel> call, Response<NewMemberApiModel> response) {
+                if(response.code()==200) {
+                    NewMemberApiModel newMemberApiModel = response.body();
+                    AbstractApiContext.get().setUserToken(newMemberApiModel.getToken());
+                }
+                callback.onResponse(response);
+            }
+
+            @Override
+            public void onFailure(Call<NewMemberApiModel> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
+    }
+
 }
