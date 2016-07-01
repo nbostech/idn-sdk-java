@@ -9,10 +9,8 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
-import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -37,7 +35,7 @@ public interface IdentityRemoteApi {
     Call<TokenApiModel> getToken(@Field("client_id") String clientId, @Field("client_secret") String clientSecret, @Field("grant_type") String grantType);
 
     @POST(tokenUrl)
-    Call<TokenApiModel> refreshToken(@Field("client_id") String clientId, @Field("client_secret") String clientSecret, @Field("grant_type") String grantType, @Field("refresh_token") String refreshToken);
+    Call<TokenApiModel> refreshAccessToken(@Field("client_id") String clientId, @Field("client_secret") String clientSecret, @Field("grant_type") String grantType, @Field("refresh_token") String refreshToken);
 
     @POST(loginUrl)
     Call<NewMemberApiModel> login(@Header("Authorization") String authorization, @Body LoginModel login);
@@ -46,13 +44,13 @@ public interface IdentityRemoteApi {
     Call<NewMemberApiModel> signup(@Header("Authorization") String authorization, @Body MemberSignupModel memberSignupModel);
 
     @POST(forgotUrl)
-    Call<RestMessage> forgot(@Header("Authorization") String authorization, @Body ResetPasswordModel resetPasswordModel);
+    Call<RestMessage> resetCredentials(@Header("Authorization") String authorization, @Body ResetPasswordModel resetPasswordModel);
 
     @POST(changeUrl)
-    Call<RestMessage> changePassword(@Header("Authorization") String authorization, @Body UpdatePasswordApiModel changePassword);
+    Call<RestMessage> updateCredentials(@Header("Authorization") String authorization, @Body UpdatePasswordApiModel changePassword);
 
     @GET(socialLoginUrl)
-    Call<SocialConnectUrlResponse> socialLogin(@Header("Authorization") String authorization, @Path("loginService") String connectService);
+    Call<SocialConnectUrlResponse> socialWebViewLogin(@Header("Authorization") String authorization, @Path("loginService") String connectService);
 
     @GET(authorizeUrl)
     Call<NewMemberApiModel> authorize(@Header("Authorization") String authorization, @Path("authorizeService") String connectService, @Query("code") String code, @Query("state") String state);
@@ -61,12 +59,12 @@ public interface IdentityRemoteApi {
     Call<NewMemberApiModel> connect(@Header("Authorization") String authorization, @Path("connectService") String connectService, @Body SocialConnectApiModel socialConnectApiModel);
 
     @GET(logoutUrl)
-    Call<NewMemberApiModel> logout(@Header("Authorization") String authorization);
+    Call<RestMessage> logout(@Header("Authorization") String authorization);
 
     @GET(profileUrl)
-    Call<MemberApiModel> getProfile(@Header("Authorization") String authorization, @Path("uuid") String uuid);
+    Call<MemberApiModel> getMemberDetails(@Header("Authorization") String authorization, @Path("uuid") String uuid);
 
     @PUT(profileUrl)
-    Call<MemberApiModel> updateProfile(@Header("Authorization") String authorization, @Path("uuid") String uuid, @Body MemberApiModel memberApiModel);
+    Call<MemberApiModel> updateMemberDetails(@Header("Authorization") String authorization, @Path("uuid") String uuid, @Body MemberApiModel memberApiModel);
 
 }

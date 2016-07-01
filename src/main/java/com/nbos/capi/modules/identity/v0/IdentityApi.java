@@ -192,10 +192,10 @@ public class IdentityApi extends NetworkApi {
         });
         return member;
     }
-    public MemberApiModel getProfile(String uuid, final IdnCallback<MemberApiModel> callback) {
+    public MemberApiModel getMemberDetails(String uuid, final IdnCallback<MemberApiModel> callback) {
         IdentityRemoteApi identityRemoteApi = getRemoteApi();
         TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
-        Call<MemberApiModel> call = identityRemoteApi.getProfile("Bearer " + tokenApiModel.getAccess_token(),uuid);
+        Call<MemberApiModel> call = identityRemoteApi.getMemberDetails("Bearer " + tokenApiModel.getAccess_token(),uuid);
 
         MemberApiModel member=null;
         call.enqueue(new Callback<MemberApiModel>() {
@@ -213,4 +213,108 @@ public class IdentityApi extends NetworkApi {
         });
         return member;
     }
+    public MemberApiModel updateMemberDetails(String uuid,MemberApiModel memberApiModel, final IdnCallback<MemberApiModel> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
+        Call<MemberApiModel> call = identityRemoteApi.updateMemberDetails("Bearer " + tokenApiModel.getAccess_token(),uuid,memberApiModel);
+
+        MemberApiModel member=null;
+        call.enqueue(new Callback<MemberApiModel>() {
+            @Override
+            public void onResponse(Call<MemberApiModel> call, Response<MemberApiModel> response) {
+                if(response.code()==200) {
+                    callback.onResponse(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MemberApiModel> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
+    }
+    public RestMessage updateCredentials(UpdatePasswordApiModel updatePasswordApiModel, final IdnCallback<RestMessage> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
+        Call<RestMessage> call = identityRemoteApi.updateCredentials("Bearer " + tokenApiModel.getAccess_token(),updatePasswordApiModel);
+
+        RestMessage member=null;
+        call.enqueue(new Callback<RestMessage>() {
+            @Override
+            public void onResponse(Call<RestMessage> call, Response<RestMessage> response) {
+                if(response.code()==200) {
+                    callback.onResponse(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RestMessage> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
+    }
+    public RestMessage resetCredentials(ResetPasswordModel resetPasswordModel, final IdnCallback<RestMessage> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
+        Call<RestMessage> call = identityRemoteApi.resetCredentials("Bearer " + tokenApiModel.getAccess_token(),resetPasswordModel);
+
+        RestMessage member=null;
+        call.enqueue(new Callback<RestMessage>() {
+            @Override
+            public void onResponse(Call<RestMessage> call, Response<RestMessage> response) {
+                if(response.code()==200) {
+                    callback.onResponse(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RestMessage> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
+    }
+    public RestMessage logout(final IdnCallback<RestMessage> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
+        Call<RestMessage> call = identityRemoteApi.logout("Bearer " + tokenApiModel.getAccess_token());
+        RestMessage member=null;
+        call.enqueue(new Callback<RestMessage>() {
+            @Override
+            public void onResponse(Call<RestMessage> call, Response<RestMessage> response) {
+                if(response.code()==200) {
+                    callback.onResponse(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RestMessage> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
+    }
+    public SocialConnectUrlResponse socialWebViewLogin(String connectService, final IdnCallback<SocialConnectUrlResponse> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
+        Call<SocialConnectUrlResponse> call = identityRemoteApi.socialWebViewLogin("Bearer " + tokenApiModel.getAccess_token(),connectService);
+        SocialConnectUrlResponse member=null;
+        call.enqueue(new Callback<SocialConnectUrlResponse>() {
+            @Override
+            public void onResponse(Call<SocialConnectUrlResponse> call, Response<SocialConnectUrlResponse> response) {
+                if(response.code()==200) {
+                    callback.onResponse(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SocialConnectUrlResponse> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
+    }
+
 }
