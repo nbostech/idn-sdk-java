@@ -122,7 +122,27 @@ public class IdentityApi extends NetworkApi {
         return member;
     }
     
-    public NewMemberApiModel signup(MemberSignupModel memberSignupModel) {
-        return null;
+    public NewMemberApiModel signup(MemberSignupModel memberSignupModel, final IdnCallback<NewMemberApiModel> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getClientToken();
+        Call<NewMemberApiModel> call = identityRemoteApi.signup("Bearer " + tokenApiModel.getAccess_token(),memberSignupModel);
+
+        NewMemberApiModel member=null;
+        call.enqueue(new Callback<NewMemberApiModel>() {
+            @Override
+            public void onResponse(Call<NewMemberApiModel> call, Response<NewMemberApiModel> response) {
+                if(response.code()==200) {
+                    NewMemberApiModel newMemberApiModel = response.body();
+                    AbstractApiContext.get().setUserToken(newMemberApiModel.getToken());
+                }
+                callback.onResponse(response);
+            }
+
+            @Override
+            public void onFailure(Call<NewMemberApiModel> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
     }
 }

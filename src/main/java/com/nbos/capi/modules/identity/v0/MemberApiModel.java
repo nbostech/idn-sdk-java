@@ -45,6 +45,23 @@ public class MemberApiModel {
     String firstName;
     String lastName;
     String phone;
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     String description;
     String uuid;
 

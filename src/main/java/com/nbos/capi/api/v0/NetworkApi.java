@@ -91,7 +91,6 @@ public class NetworkApi {
     public Request.Builder newRequest(String api) {
         String endpoint = api;
         if(!api.startsWith("http")) {
-
             endpoint = host+api;
         }
         return new Request.Builder().url(endpoint);
