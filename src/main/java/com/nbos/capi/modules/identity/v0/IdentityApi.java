@@ -3,6 +3,7 @@ package com.nbos.capi.modules.identity.v0;
 import com.nbos.capi.api.v0.AbstractApiContext;
 import com.nbos.capi.api.v0.IdnCallback;
 import com.nbos.capi.api.v0.NetworkApi;
+import com.nbos.capi.api.v0.RestMessage;
 import com.nbos.capi.api.v0.TokenApiModel;
 import com.nbos.capi.modules.ids.v0.IDS;
 
@@ -191,5 +192,25 @@ public class IdentityApi extends NetworkApi {
         });
         return member;
     }
+    public MemberApiModel getProfile(String uuid, final IdnCallback<MemberApiModel> callback) {
+        IdentityRemoteApi identityRemoteApi = getRemoteApi();
+        TokenApiModel tokenApiModel = AbstractApiContext.get().getClientToken();
+        Call<MemberApiModel> call = identityRemoteApi.getProfile("Bearer " + tokenApiModel.getAccess_token(),uuid);
 
+        MemberApiModel member=null;
+        call.enqueue(new Callback<MemberApiModel>() {
+            @Override
+            public void onResponse(Call<MemberApiModel> call, Response<MemberApiModel> response) {
+                if(response.code()==200) {
+                    callback.onResponse(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MemberApiModel> call, Throwable t) {
+                callback.onFailure(t);
+            }
+        });
+        return member;
+    }
 }
