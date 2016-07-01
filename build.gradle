@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 group 'com.nbos'
-version '0.1'
+version '0.2'
 allprojects {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7

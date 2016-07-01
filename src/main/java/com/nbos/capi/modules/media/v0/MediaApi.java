@@ -1,11 +1,10 @@
-package com.nbos.capi.modules.identity.v0;
+package com.nbos.capi.modules.media.v0;
 
 import com.nbos.capi.api.v0.AbstractApiContext;
 import com.nbos.capi.api.v0.IdnCallback;
 import com.nbos.capi.api.v0.NetworkApi;
 import com.nbos.capi.api.v0.RestMessage;
 import com.nbos.capi.api.v0.TokenApiModel;
-import com.nbos.capi.modules.media.v0.MediaApiModel;
 
 import java.util.Map;
 

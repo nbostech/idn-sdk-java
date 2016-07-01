@@ -1,7 +1,6 @@
-package com.nbos.capi.modules.identity.v0;
+package com.nbos.capi.modules.media.v0;
 
 import com.nbos.capi.api.v0.RestMessage;
-import com.nbos.capi.modules.media.v0.MediaApiModel;
 
 import java.util.Map;
 
