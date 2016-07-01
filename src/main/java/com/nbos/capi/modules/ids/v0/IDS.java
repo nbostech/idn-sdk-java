@@ -80,9 +80,11 @@ public class IDS {
             try {
                 try {
                     NetworkApi api = (NetworkApi)apiClass.newInstance();
-                    return (Any)api;
                     // TODO: we should get the host from IDS interface for the module
-                    //api.setHost("http://api.qa1.nbos.in/");
+                    // String hostName = IDS.getHost(moduleName)
+                    //api.setHost(hostName);
+                    return (Any)api;
+
                 } catch( Exception x ) {
                     //  Log.i("IDS","unable to instantiate new object");
                 }

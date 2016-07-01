@@ -2,11 +2,7 @@ package com.nbos.capi.modules.identity.v0;
 
 import com.nbos.capi.api.v0.RestMessage;
 import com.nbos.capi.api.v0.TokenApiModel;
-import com.nbos.capi.modules.media.v0.MediaApiModel;
 
-import java.util.Map;
-
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
