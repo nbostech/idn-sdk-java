@@ -18,7 +18,10 @@ public class IdnSDK {
         } catch(Exception e) {
             System.out.println("unable to load");
         }
-        IdentityApi identityApi = IDS.getModuleApi("identity");
-        identityApi.getClientToken();
+        TokenApiModel tokenApiModel = apiContext.getClientToken();
+        if( tokenApiModel == null ) {
+            IdentityApi identityApi = IDS.getModuleApi("identity");
+            identityApi.getClientToken();
+        }
     }
 }

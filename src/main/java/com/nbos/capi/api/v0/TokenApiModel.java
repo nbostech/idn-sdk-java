@@ -1,7 +1,9 @@
 package com.nbos.capi.api.v0;
 
 
-public class TokenApiModel {
+import java.io.Serializable;
+
+public class TokenApiModel implements Serializable {
 
 
     public Long getExpires_in() {
