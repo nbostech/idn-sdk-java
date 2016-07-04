@@ -5,7 +5,6 @@ import com.nbos.capi.api.v0.IdnCallback;
 import com.nbos.capi.api.v0.NetworkApi;
 import com.nbos.capi.api.v0.RestMessage;
 import com.nbos.capi.api.v0.TokenApiModel;
-import com.nbos.capi.modules.ids.v0.IDS;
 
 import java.io.IOException;
 import java.util.Map;
