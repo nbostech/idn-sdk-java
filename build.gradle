@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-group 'com.nbos'
+group 'in.wavelabs'
 version '0.2'
 allprojects {
     sourceCompatibility = 1.7
@@ -25,15 +25,15 @@ dependencies {
 ////
 model {
     tasks.generatePomFileForApiClientPublication {
-        destination = file("$buildDir/java-api-client-${version}.pom")
+        destination = file("$buildDir/idn-java-api-${version}.pom")
     }
 }
 
 //
 //
 ext {
-    apiClientPomFile = file("${project.projectDir}/build/java-api-client-${version}.pom")
-    signedApiClientPomFile = file("${project.projectDir}/build/java-api-client-${version}.asc")
+    apiClientPomFile = file("${project.projectDir}/build/idn-java-api-${version}.pom")
+    signedApiClientPomFile = file("${project.projectDir}/build/idn-java-api-${version}.asc")
 }
 
 // avoids duplicates in a jar file
@@ -59,17 +59,17 @@ task apiClientDocs(type: Javadoc) {
 }
 
 task apiClientJar(type: Jar, dependsOn:[classes]){
-    baseName = 'java-api-client'
+    baseName = 'idn-java-api'
     from sourceSets.main.output
 }
 
 task apiClientSourceJar(type: Jar){
-    baseName = 'java-api-client-sources'
+    baseName = 'idn-java-api-sources'
     from(sourceSets.main.java)
 }
 
 task apiClientDocsJar(type: Jar, dependsOn: apiClientDocs) {
-    baseName = 'java-api-client-javadoc'
+    baseName = 'idn-java-api-javadoc'
     from apiClientDocs.destinationDir
 }
 //
@@ -107,7 +107,7 @@ def appendDependencies = { pomNode ->
 publishing {
     publications {
         apiClient(MavenPublication) {
-            artifactId 'java-api-client'
+            artifactId 'idn-java-api'
             artifact(apiClientJar) {
             }
             artifact(apiClientSourceJar) {
@@ -123,7 +123,7 @@ publishing {
                     extension  = 'jar.asc'
                 }
             }
-            def signedPomFile = file("${project.projectDir}/build/java-api-client-${version}.pom.asc")
+            def signedPomFile = file("${project.projectDir}/build/idn-java-api-${version}.pom.asc")
             if(signedPomFile) {
                 artifact(signedPomFile) {
                     classifier = null
