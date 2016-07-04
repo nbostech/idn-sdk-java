@@ -168,8 +168,8 @@ publishing {
         maven {
             name 'maven2'
             credentials {
-                username = "wavelabs"
-                password = "Zq952FI6o7Pz"
+                username = ""
+                password = ""
             }
             url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
         }
