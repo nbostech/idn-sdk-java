@@ -18,6 +18,12 @@ import retrofit2.Response;
  */
 
 public class MediaApi extends NetworkApi {
+    public MediaApi() {
+        super();
+        setModuleName("media");
+        setRemoteApiClass(MediaRemoteApi.class);
+    }
+
     public MediaApiModel getMedia(String uuid, String mediafor, final IdnCallback<MediaApiModel> callback) {
         MediaRemoteApi mediaRemoteApi = getRemoteApi();
         TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
