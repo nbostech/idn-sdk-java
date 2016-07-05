@@ -5,7 +5,14 @@ import java.util.List;
 public class MemberApiModel {
     private Long id;
     private String email;
-
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String description;
+    private String uuid;
+    private Boolean isExternal;
+    private List<SocialAccountApiModel> socialAccounts;
+    private List<EmailConnectApiModel> emailConnects;
     public String getFirstName() {
         return firstName;
     }
@@ -33,7 +40,9 @@ public class MemberApiModel {
     public String getUuid() {
         return uuid;
     }
-
+    public Boolean isExternal() {
+        return isExternal;
+    }
     public List<SocialAccountApiModel> getSocialAccounts() {
         return socialAccounts;
     }
@@ -41,10 +50,6 @@ public class MemberApiModel {
     public List<EmailConnectApiModel> getEmailConnects() {
         return emailConnects;
     }
-
-    String firstName;
-    String lastName;
-    String phone;
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -61,10 +66,4 @@ public class MemberApiModel {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    String description;
-    String uuid;
-
-    List<SocialAccountApiModel> socialAccounts;
-    List<EmailConnectApiModel> emailConnects;
 }
