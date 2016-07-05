@@ -35,8 +35,9 @@ public class IDS {
 
     static {
         try {
-            Class.forName("in.wavelabs.idn.modules.identity.v0.IdentityIdsRegistry");
-            Class.forName("in.wavelabs.idn.modules.media.v0.MediaIdsRegistry");
+            Class.forName("com.nbos.capi.modules.identity.v0.IdentityIdsRegistry");
+            Class.forName("com.nbos.capi.modules.media.v0.MediaIdsRegistry");
+
 
         } catch( Exception x ) {
            // Log.i("IDS","unable to load class");
