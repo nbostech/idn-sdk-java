@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 group 'in.wavelabs'
-version '0.2.2'
+version '0.2.6'
 allprojects {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
@@ -168,8 +168,8 @@ publishing {
         maven {
             name 'maven2'
             credentials {
-                username = ""
-                password = ""
+                username = "wavelabs"
+                password = "Zq952FI6o7Pz"
             }
             url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
         }

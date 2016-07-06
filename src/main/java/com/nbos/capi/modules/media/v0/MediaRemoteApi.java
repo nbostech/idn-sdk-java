@@ -24,5 +24,5 @@ public interface MediaRemoteApi {
 
     @Multipart
     @POST(mediaUrl)
-    Call<RestMessage> uploadMedia(@Header("Authorization") String authorization, @PartMap Map<String, RequestBody> params);
+    Call<RestMessage> uploadMedia(@Header("Authorization")  String authorization, @Query("id") String uuid, @Query("mediafor") String mediafor, @PartMap Map<String, RequestBody> params);
 }

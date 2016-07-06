@@ -46,10 +46,10 @@ public class MediaApi extends NetworkApi {
         return media;
     }
 
-    public RestMessage uploadMedia(Map<String, RequestBody> params,final IdnCallback<RestMessage> callback) {
+    public RestMessage uploadMedia(String id, String mediafor, Map<String, RequestBody> params,final IdnCallback<RestMessage> callback) {
         MediaRemoteApi mediaRemoteApi = getRemoteApi();
         TokenApiModel tokenApiModel = AbstractApiContext.get().getUserToken();
-        Call<RestMessage> call = mediaRemoteApi.uploadMedia("Bearer " + tokenApiModel.getAccess_token(),params);
+        Call<RestMessage> call = mediaRemoteApi.uploadMedia(id,mediafor,"Bearer " + tokenApiModel.getAccess_token(),params);
 
         RestMessage media = null;
         call.enqueue(new Callback<RestMessage>() {
