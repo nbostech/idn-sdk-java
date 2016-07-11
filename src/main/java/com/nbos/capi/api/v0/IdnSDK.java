@@ -15,6 +15,8 @@ public class IdnSDK {
         }
         try {
             Class.forName("com.nbos.capi.modules.identity.v0.IdentityIdsRegistry");
+            Class.forName("com.nbos.capi.modules.media.v0.MediaIdsRegistry");
+
         } catch(Exception e) {
             System.out.println("unable to load");
         }

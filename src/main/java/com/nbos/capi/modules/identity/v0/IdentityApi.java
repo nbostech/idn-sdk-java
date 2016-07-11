@@ -34,7 +34,7 @@ public class IdentityApi extends NetworkApi {
         try {
             Response<TokenApiModel> response = call.execute();
             TokenApiModel tokenApiModel = response.body();
-            System.out.println ( "token:" + tokenApiModel.getAccess_token() );
+            System.out.println ( "token:" + tokenApiModel.getAccess_token());
             getApiContext().setClientToken(tokenApiModel);
             return tokenApiModel;
         } catch( IOException x ) {
