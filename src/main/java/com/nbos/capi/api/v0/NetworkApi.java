@@ -28,9 +28,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class NetworkApi {
 
-    String moduleName;
-    String host;
-    Swagger sw;
+    protected String moduleName;
+    protected String host;
+    protected Swagger sw;
+    protected ApiContext apiContext;
 
     Class<?> remoteApiClass;
     Object remoteApi;
@@ -115,7 +116,7 @@ public class NetworkApi {
 
     protected Retrofit getRetrofitClient(){
         // TODO: get the host based on swagger
-        String host = AbstractApiContext.get().getHost(moduleName);
+        String host = getApiContext().getHost(moduleName);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(host)
                 .client(getOkHttpClient())
@@ -132,6 +133,11 @@ public class NetworkApi {
     }
 
 
+    public ApiContext getApiContext() {
+        if(apiContext!=null) return apiContext;
+        else apiContext = AbstractApiContext.get();
+        return apiContext;
+    }
     public Response post(Request request) {
         return null;
     }

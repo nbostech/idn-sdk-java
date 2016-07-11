@@ -37,8 +37,6 @@ public class IDS {
         try {
             Class.forName("com.nbos.capi.modules.identity.v0.IdentityIdsRegistry");
             Class.forName("com.nbos.capi.modules.media.v0.MediaIdsRegistry");
-
-
         } catch( Exception x ) {
            // Log.i("IDS","unable to load class");
         }
@@ -56,93 +54,28 @@ public class IDS {
         return Arrays.asList(modules);
     }
 
-    public static <Any> Any getIDSApi() {
-        return (Any)getRetrofitClient().create(IdsApi.class);
-    }
-
     public static <Any> Any getModuleApi(String moduleName) {
         System.out.println(registry);
         Class apiClass = (Class)registry.get(moduleName);
         if( apiClass == null ) {
             try {
                 apiClass = Class.forName("com.nbos.com.nbos.capi.api.v0.NetworkApi");
-                try {
-                    NetworkApi api = (NetworkApi)apiClass.newInstance();
-                    // TODO: we should get the host from IDS interface for the module
-                    api.setHost("http://api.qa1.nbos.in/");
-                    return (Any)api;
-                } catch( Exception x ) {
-                  //  Log.i("IDS","unable to instantiate new object");
-                }
-            } catch( Exception x ) {
-               // Log.i("IDS","unable to load networkApi");
-            }
-        }
-        if( apiClass != null ) {
-            //getHostForModule(moduleName);
-            try {
-                try {
-                    NetworkApi api = (NetworkApi)apiClass.newInstance();
-                    // TODO: we should get the host from IDS interface for the module
-                    // String hostName = IDS.getHost(moduleName)
-                    //api.setHost(hostName);
-                    return (Any)api;
-
-                } catch( Exception x ) {
-                    //  Log.i("IDS","unable to instantiate new object");
-                }
-
-
+                NetworkApi api = (NetworkApi)apiClass.newInstance();
+                return (Any)api;
             } catch( Exception x ) {
               //  Log.i("IDS","unable to instantiate new object");
             }
         }
+        if( apiClass != null ) {
+            try {
+                NetworkApi api = (NetworkApi)apiClass.newInstance();
+                return (Any)api;
+            } catch( Exception x ) {
+                //  Log.i("IDS","unable to instantiate new object");
+            }
+        }
         return null;
-
     }
-    public static String getHostForModule(String moduleName){
-        //TODO: Get Host From Module Name
-        final String[] host = new String[1];
-        IdsRemoteApi idsRemoteApi = IDS.getIDSApi();
-        idsRemoteApi.getModApiJson(moduleName).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-               System.out.println(response);
-                Swagger20Parser parser = new Swagger20Parser();
-                try {
-                    Swagger sw = parser.parse(response.body().string());
-                    System.out.println(sw.getHost());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-        return host[0];
-    }
-    protected static OkHttpClient getOkHttpClient() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        return client;
-    }
-
-    protected static Retrofit getRetrofitClient(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.qa1.nbos.in/")
-                .client(getOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        return retrofit;
-    }
-
-    private static final HashMap<Class, Object> apiClients = new HashMap<>();
-
-
 
     public static void register(String moduleName, Class clazz){
         registry.put(moduleName,clazz);

@@ -8,15 +8,10 @@ import java.util.Map;
 
 public interface ApiContext {
     /**
-     * setToken()
-     * getToken()
-     * getIdnHost()
-     * setHost()
+     * opportunity for the context to initialize itself, if it needs to read any properties from
+     * config files etc..
      */
-
     void init();
-    void setToken(String context, TokenApiModel tokenApiModel);
-    TokenApiModel getToken(String context);
 
     void setHost(String moduleName, String host);
     String getHost(String moduleName);
@@ -28,8 +23,8 @@ public interface ApiContext {
     Map getClientCredentials();
     TokenApiModel getClientToken();
 
-    void setUserToken(TokenApiModel tokenApiModel);
-    TokenApiModel getUserToken();
+    void setUserToken(String moduleName, TokenApiModel tokenApiModel);
+    TokenApiModel getUserToken(String moduleName);
 
 
     /*
@@ -39,7 +34,8 @@ public interface ApiContext {
      *   "host"
      * @param property
      * @param value
+     * we may have to re-evaluate the need of this generic API
      */
-    void set(String property, Object value);
-    Object get(String property);
+//    void set(String property, Object value);
+//    Object get(String property);
 }
