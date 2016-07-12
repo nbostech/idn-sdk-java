@@ -256,7 +256,7 @@ public class IdentityApi extends NetworkApi {
     }
     public RestMessage resetCredentials(ResetPasswordModel resetPasswordModel, final IdnCallback<RestMessage> callback) {
         IdentityRemoteApi identityRemoteApi = getRemoteApi();
-        TokenApiModel tokenApiModel = getApiContext().getUserToken(moduleName);
+        TokenApiModel tokenApiModel = getApiContext().getClientToken();
         Call<RestMessage> call = identityRemoteApi.resetCredentials("Bearer " + tokenApiModel.getAccess_token(),resetPasswordModel);
 
         RestMessage member=null;
