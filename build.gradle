@@ -9,12 +9,12 @@ allprojects {
     targetCompatibility = 1.7
 }
 dependencies {
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
-    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.3.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'io.swagger:swagger-parser:1.0.20'
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.1'
 }
