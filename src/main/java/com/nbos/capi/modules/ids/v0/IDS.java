@@ -1,6 +1,7 @@
 package com.nbos.capi.modules.ids.v0;
 
 
+import com.nbos.capi.api.v0.AbstractApiContext;
 import com.nbos.capi.api.v0.NetworkApi;
 
 import java.io.IOException;
@@ -44,23 +45,34 @@ public class IDS {
         //registry.put("identity",NetworkApi.class);
     }
 
+//
+//    public static List<?> findModules() {
+//        String[] modules = {"identity","core","media"};
+//        return Arrays.asList(modules);
+//    }
+//    public static List<?> findTenantModules(String tenantId) {
+//        String[] modules = {"identity","core","media"};
+//        return Arrays.asList(modules);
+//    }
 
-    public static List<?> findModules() {
-        String[] modules = {"identity","core","media"};
-        return Arrays.asList(modules);
-    }
-    public static List<?> findTenantModules(String tenantId) {
-        String[] modules = {"identity","core","media"};
-        return Arrays.asList(modules);
-    }
-
+    /**
+     * returns networkApi with 'app' apiContext
+     * @param moduleName
+     * @param <Any>
+     * @return
+     */
     public static <Any> Any getModuleApi(String moduleName) {
+        return getModuleApi(moduleName,"app");
+    }
+
+    public static <Any> Any getModuleApi(String moduleName, String contextName) {
         System.out.println(registry);
         Class apiClass = (Class)registry.get(moduleName);
         if( apiClass == null ) {
             try {
                 apiClass = Class.forName("com.nbos.com.nbos.capi.api.v0.NetworkApi");
                 NetworkApi api = (NetworkApi)apiClass.newInstance();
+                if(api!=null) api.setApiContext(AbstractApiContext.get(contextName));
                 return (Any)api;
             } catch( Exception x ) {
               //  Log.i("IDS","unable to instantiate new object");
@@ -69,6 +81,7 @@ public class IDS {
         if( apiClass != null ) {
             try {
                 NetworkApi api = (NetworkApi)apiClass.newInstance();
+                if(api!=null) api.setApiContext(AbstractApiContext.get(contextName));
                 return (Any)api;
             } catch( Exception x ) {
                 //  Log.i("IDS","unable to instantiate new object");
@@ -76,6 +89,8 @@ public class IDS {
         }
         return null;
     }
+
+
 
     public static void register(String moduleName, Class clazz){
         registry.put(moduleName,clazz);

@@ -57,6 +57,10 @@ public class NetworkApi {
         return null;
     }
 
+    public void setApiContext(ApiContext apiContext) {
+        this.apiContext=apiContext;
+    }
+
     public void setHost(String host) {
         this.host=host;
         if(host.endsWith("/")) {
@@ -116,7 +120,7 @@ public class NetworkApi {
 
     protected Retrofit getRetrofitClient(){
         // TODO: get the host based on swagger
-        String host = getApiContext().getHost(moduleName);
+        String host = apiContext.getHost(moduleName);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(host)
                 .client(getOkHttpClient())
@@ -133,11 +137,6 @@ public class NetworkApi {
     }
 
 
-    public ApiContext getApiContext() {
-        if(apiContext!=null) return apiContext;
-        else apiContext = AbstractApiContext.get();
-        return apiContext;
-    }
     public Response post(Request request) {
         return null;
     }

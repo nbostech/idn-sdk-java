@@ -7,12 +7,18 @@ import java.util.Map;
  * Created by vivekkiran on 6/23/16.
  */
 
-public class InMemoryApiContext implements ApiContext {
+public class InMemoryApiContext extends AbstractApiContext {
 
     HashMap<String,Object> store = new HashMap<>();
     HashMap<String,String> hosts = new HashMap<>();
     HashMap<String,TokenApiModel> tokens = new HashMap<>();
 
+    public InMemoryApiContext() {}
+    public InMemoryApiContext(String name) {
+        super(name);
+    }
+
+    public String getName() { return name; }
     @Override
     public void init() {}
     @Override

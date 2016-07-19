@@ -7,6 +7,10 @@ import java.util.Map;
  */
 
 public interface ApiContext {
+
+    // context name, this should give the ability to have as many contexts as possible
+    // 'app' context, 'api' context, etc..
+    String getName();
     /**
      * opportunity for the context to initialize itself, if it needs to read any properties from
      * config files etc..
