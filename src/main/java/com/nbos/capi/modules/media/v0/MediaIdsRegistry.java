@@ -8,6 +8,6 @@ import com.nbos.capi.modules.ids.v0.IDS;
 
 public class MediaIdsRegistry {
     static {
-        IDS.register("media",MediaApi.class);
+        IDS.register("media", MediaApi.class);
     }
 }

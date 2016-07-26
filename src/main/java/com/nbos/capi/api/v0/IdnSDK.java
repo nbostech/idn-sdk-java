@@ -8,20 +8,20 @@ import com.nbos.capi.modules.ids.v0.IDS;
  */
 
 public class IdnSDK {
-    public static final void init(ApiContext apiContext){
+    public static final void init(ApiContext apiContext) {
         AbstractApiContext.registerApiContext(apiContext);
-        if(apiContext!=null) {
+        if (apiContext != null) {
             apiContext.init();
         }
         try {
             Class.forName("com.nbos.capi.modules.identity.v0.IdentityIdsRegistry");
             Class.forName("com.nbos.capi.modules.media.v0.MediaIdsRegistry");
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("unable to load");
         }
         TokenApiModel tokenApiModel = apiContext.getClientToken();
-        if( tokenApiModel == null ) {
+        if (tokenApiModel == null) {
             IdentityApi identityApi = IDS.getModuleApi("identity");
             identityApi.getClientToken();
         }

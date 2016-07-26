@@ -8,6 +8,7 @@ public class SocialConnectApiModel {
     private String clientId;
     private String accessToken;
     private String expiresIn;
+
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }

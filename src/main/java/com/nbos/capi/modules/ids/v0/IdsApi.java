@@ -7,11 +7,12 @@ import com.nbos.capi.api.v0.NetworkApi;
  */
 
 public class IdsApi extends NetworkApi {
-    public IdsApi(){
+    public IdsApi() {
         super();
         setRemoteApiClass(IdsRemoteApi.class);
         setModuleName("ids");
     }
+
     // the wrapper methods to call IdsRemoteApi
     public IdsApi(String host) {
         setHost(host);

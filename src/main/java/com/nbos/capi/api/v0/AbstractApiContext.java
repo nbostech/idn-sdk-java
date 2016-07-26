@@ -8,18 +8,18 @@ import java.util.HashMap;
 
 public abstract class AbstractApiContext implements ApiContext {
 
-    static HashMap<String,ApiContext> apiContexts = new HashMap<>();
+    static HashMap<String, ApiContext> apiContexts = new HashMap<>();
 
     // name of the context instance
-    protected String name="app";
+    protected String name = "app";
 
     public static void registerApiContext(ApiContext apiContext) {
-        apiContexts.put(apiContext.getName(),apiContext);
+        apiContexts.put(apiContext.getName(), apiContext);
     }
 
     public static ApiContext get(String name) {
         ApiContext ctx = apiContexts.get(name);
-        if (ctx==null) {
+        if (ctx == null) {
             ctx = new InMemoryApiContext(name);
             registerApiContext(ctx);
         }
@@ -27,9 +27,10 @@ public abstract class AbstractApiContext implements ApiContext {
     }
 
 
+    public AbstractApiContext() {
+    }
 
-    public AbstractApiContext() {}
     public AbstractApiContext(String name) {
-        this.name=name;
+        this.name = name;
     }
 }

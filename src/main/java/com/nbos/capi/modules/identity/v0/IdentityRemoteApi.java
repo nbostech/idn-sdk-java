@@ -25,7 +25,7 @@ public interface IdentityRemoteApi {
     String authorizeUrl = baseIdentityUrl + "/auth/social/{authorizeService}/authorize";
     String profileUrl = baseIdentityUrl + "/users/{uuid}";
     String forgotUrl = baseIdentityUrl + "/auth/forgotPassword";
-    String changeUrl  =baseIdentityUrl + "/auth/changePassword";
+    String changeUrl = baseIdentityUrl + "/auth/changePassword";
     String logoutUrl = baseIdentityUrl + "/auth/logout";
     String socialLoginUrl = baseIdentityUrl + "/auth/social/{loginService}/login";
 

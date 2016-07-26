@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 group 'in.wavelabs'
-version '0.2.7'
+version '0.2.8'
 allprojects {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
@@ -16,6 +16,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp-urlconnection:3.4.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'io.swagger:swagger-parser:1.0.21'
+    compile 'junit:junit:4.12'
 }
 
 ////
@@ -54,12 +55,12 @@ task apiClientDocs(type: Javadoc) {
     source = sourceSets.main.java
 }
 
-task apiClientJar(type: Jar, dependsOn:[classes]){
+task apiClientJar(type: Jar, dependsOn: [classes]) {
     baseName = 'idn-java-api'
     from sourceSets.main.output
 }
 
-task apiClientSourceJar(type: Jar){
+task apiClientSourceJar(type: Jar) {
     baseName = 'idn-java-api-sources'
     from(sourceSets.main.java)
 }
@@ -75,12 +76,12 @@ signing {
     sign apiClientDocsJar
 }
 
-task signApiClientPomFile(type:Sign){
+task signApiClientPomFile(type: Sign) {
     sign project.ext.apiClientPomFile
 }
 
 def signedFiles = {
-    ["signApiClientJar","signApiClientSourceJar","signApiClientDocsJar"].collectMany {
+    ["signApiClientJar", "signApiClientSourceJar", "signApiClientDocsJar"].collectMany {
         project.tasks."${it}".signatureFiles.collect { it }
     }
 }
@@ -88,8 +89,11 @@ def signedFiles = {
 def appendDependencies = { pomNode ->
     def dependenciesNode = pomNode.getAt("dependencies")
 
-    if(dependenciesNode) { dependenciesNode=dependenciesNode[0] }
-    else { dependenciesNode = pomNode.appendNode('dependencies') }
+    if (dependenciesNode) {
+        dependenciesNode = dependenciesNode[0]
+    } else {
+        dependenciesNode = pomNode.appendNode('dependencies')
+    }
 
     //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
     configurations.compile.allDependencies.each {
@@ -113,17 +117,17 @@ publishing {
                 classifier "javadoc"
             }
             signedFiles().each { signedFile ->
-                artifact (signedFile) {
-                    def fileName=signedFile.name
-                    classifier = fileName.contains("-sources") ? "sources" : (fileName.contains("-javadoc")?'javadoc':null)
-                    extension  = 'jar.asc'
+                artifact(signedFile) {
+                    def fileName = signedFile.name
+                    classifier = fileName.contains("-sources") ? "sources" : (fileName.contains("-javadoc") ? 'javadoc' : null)
+                    extension = 'jar.asc'
                 }
             }
             def signedPomFile = file("${project.projectDir}/build/idn-java-api-${version}.pom.asc")
-            if(signedPomFile) {
+            if (signedPomFile) {
                 artifact(signedPomFile) {
                     classifier = null
-                    extension  = 'pom.asc'
+                    extension = 'pom.asc'
                 }
             }
             pom.withXml {

@@ -11,6 +11,7 @@ public interface ApiContext {
     // context name, this should give the ability to have as many contexts as possible
     // 'app' context, 'api' context, etc..
     String getName();
+
     /**
      * opportunity for the context to initialize itself, if it needs to read any properties from
      * config files etc..
@@ -18,16 +19,20 @@ public interface ApiContext {
     void init();
 
     void setHost(String moduleName, String host);
+
     String getHost(String moduleName);
 
 
     void setClientCredentials(Map map);
+
     void setClientToken(TokenApiModel tokenApiModel);
 
     Map getClientCredentials();
+
     TokenApiModel getClientToken();
 
     void setUserToken(String moduleName, TokenApiModel tokenApiModel);
+
     TokenApiModel getUserToken(String moduleName);
 
 

@@ -13,6 +13,7 @@ public class MemberApiModel {
     private Boolean isExternal;
     private List<SocialAccountApiModel> socialAccounts;
     private List<EmailConnectApiModel> emailConnects;
+
     public String getFirstName() {
         return firstName;
     }
@@ -40,9 +41,11 @@ public class MemberApiModel {
     public String getUuid() {
         return uuid;
     }
+
     public Boolean isExternal() {
         return isExternal;
     }
+
     public List<SocialAccountApiModel> getSocialAccounts() {
         return socialAccounts;
     }

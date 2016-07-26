@@ -1,6 +1,6 @@
 
 # Created by https://www.gitignore.io/api/java,gradle,android
-
+.DS_Store
 ### Android ###
 # Built application files
 *.apk
@@ -74,3 +74,5 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
+
+MavenCentral/

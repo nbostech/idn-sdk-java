@@ -38,8 +38,8 @@ public class IDS {
         try {
             Class.forName("com.nbos.capi.modules.identity.v0.IdentityIdsRegistry");
             Class.forName("com.nbos.capi.modules.media.v0.MediaIdsRegistry");
-        } catch( Exception x ) {
-           // Log.i("IDS","unable to load class");
+        } catch (Exception x) {
+            // Log.i("IDS","unable to load class");
         }
 
         //registry.put("identity",NetworkApi.class);
@@ -57,33 +57,34 @@ public class IDS {
 
     /**
      * returns networkApi with 'app' apiContext
+     *
      * @param moduleName
      * @param <Any>
      * @return
      */
     public static <Any> Any getModuleApi(String moduleName) {
-        return getModuleApi(moduleName,"app");
+        return getModuleApi(moduleName, "app");
     }
 
     public static <Any> Any getModuleApi(String moduleName, String contextName) {
         System.out.println(registry);
-        Class apiClass = (Class)registry.get(moduleName);
-        if( apiClass == null ) {
+        Class apiClass = (Class) registry.get(moduleName);
+        if (apiClass == null) {
             try {
                 apiClass = Class.forName("com.nbos.com.nbos.capi.api.v0.NetworkApi");
-                NetworkApi api = (NetworkApi)apiClass.newInstance();
-                if(api!=null) api.setApiContext(AbstractApiContext.get(contextName));
-                return (Any)api;
-            } catch( Exception x ) {
-              //  Log.i("IDS","unable to instantiate new object");
+                NetworkApi api = (NetworkApi) apiClass.newInstance();
+                if (api != null) api.setApiContext(AbstractApiContext.get(contextName));
+                return (Any) api;
+            } catch (Exception x) {
+                //  Log.i("IDS","unable to instantiate new object");
             }
         }
-        if( apiClass != null ) {
+        if (apiClass != null) {
             try {
-                NetworkApi api = (NetworkApi)apiClass.newInstance();
-                if(api!=null) api.setApiContext(AbstractApiContext.get(contextName));
-                return (Any)api;
-            } catch( Exception x ) {
+                NetworkApi api = (NetworkApi) apiClass.newInstance();
+                if (api != null) api.setApiContext(AbstractApiContext.get(contextName));
+                return (Any) api;
+            } catch (Exception x) {
                 //  Log.i("IDS","unable to instantiate new object");
             }
         }
@@ -91,9 +92,8 @@ public class IDS {
     }
 
 
-
-    public static void register(String moduleName, Class clazz){
-        registry.put(moduleName,clazz);
+    public static void register(String moduleName, Class clazz) {
+        registry.put(moduleName, clazz);
     }
 
 

@@ -19,10 +19,11 @@ import retrofit2.http.Query;
 
 public interface MediaRemoteApi {
     String mediaUrl = "/api/media/v0/media";
+
     @GET(mediaUrl)
     Call<MediaApiModel> getMedia(@Header("Authorization") String authorization, @Query("id") String uuid, @Query("mediafor") String mediafor);
 
     @Multipart
     @POST(mediaUrl)
-    Call<RestMessage> uploadMedia(@Header("Authorization")  String authorization, @Query("id") String uuid, @Query("mediafor") String mediafor, @PartMap Map<String, RequestBody> params);
+    Call<RestMessage> uploadMedia(@Header("Authorization") String authorization, @Query("id") String uuid, @Query("mediafor") String mediafor, @PartMap Map<String, RequestBody> params);
 }

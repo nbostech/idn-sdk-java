@@ -9,6 +9,6 @@ import com.nbos.capi.modules.ids.v0.IDS;
 
 public class IdentityIdsRegistry {
     static {
-        IDS.register("identity",IdentityApi.class);
+        IDS.register("identity", IdentityApi.class);
     }
 }
