@@ -37,7 +37,7 @@ public class NetworkApi {
     protected String moduleName;
     protected String host;
     protected Swagger sw;
-    protected ApiContext apiContext;
+    protected ApiContext   apiContext;
 
     Class<?> remoteApiClass;
     Object remoteApi;
@@ -130,7 +130,8 @@ public class NetworkApi {
 
     protected Retrofit getRetrofitClient() {
         // TODO: get the host based on swagger
-        String host = apiContext.getHost(moduleName);
+        String host = this.host;
+        if( host == null ) host = apiContext.getHost(moduleName);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(host)
                 .client(getOkHttpClient())
@@ -144,14 +145,5 @@ public class NetworkApi {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
         return client;
-    }
-
-
-    public Response post(Request request) {
-        return null;
-    }
-
-    public Response put(Request request) {
-        return null;
     }
 }

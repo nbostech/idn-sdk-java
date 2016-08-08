@@ -2,6 +2,7 @@ package com.nbos.capi.modules.ids.v0;
 
 
 import com.nbos.capi.api.v0.AbstractApiContext;
+import com.nbos.capi.api.v0.ApiContext;
 import com.nbos.capi.api.v0.NetworkApi;
 
 import java.io.IOException;
@@ -73,7 +74,9 @@ public class IDS {
             try {
                 apiClass = Class.forName("com.nbos.com.nbos.capi.api.v0.NetworkApi");
                 NetworkApi api = (NetworkApi) apiClass.newInstance();
-                if (api != null) api.setApiContext(AbstractApiContext.get(contextName));
+                ApiContext apiContext = AbstractApiContext.get(contextName);
+                if (api != null) api.setApiContext(apiContext);
+                api.setHost(apiContext.getHost(moduleName));
                 return (Any) api;
             } catch (Exception x) {
                 //  Log.i("IDS","unable to instantiate new object");
@@ -82,7 +85,9 @@ public class IDS {
         if (apiClass != null) {
             try {
                 NetworkApi api = (NetworkApi) apiClass.newInstance();
-                if (api != null) api.setApiContext(AbstractApiContext.get(contextName));
+                ApiContext apiContext = AbstractApiContext.get(contextName);
+                if (api != null) api.setApiContext(apiContext);
+                api.setHost(apiContext.getHost(moduleName));
                 return (Any) api;
             } catch (Exception x) {
                 //  Log.i("IDS","unable to instantiate new object");
