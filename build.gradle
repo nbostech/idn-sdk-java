@@ -3,7 +3,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 group 'in.wavelabs'
-version '0.2.8'
+version '0.2.10'
 allprojects {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
