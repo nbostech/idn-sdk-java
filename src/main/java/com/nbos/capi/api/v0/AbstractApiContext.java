@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public abstract class AbstractApiContext implements ApiContext {
 
-    static HashMap<String, ApiContext> apiContexts = new HashMap<>();
+    private static HashMap<String, ApiContext> apiContexts = new HashMap<>();
 
     // name of the context instance
     protected String name = "app";

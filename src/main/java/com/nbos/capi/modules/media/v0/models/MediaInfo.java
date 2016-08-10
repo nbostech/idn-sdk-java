@@ -1,4 +1,4 @@
-package com.nbos.capi.modules.media.v0;
+package com.nbos.capi.modules.media.v0.models;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.nbos.capi.modules.identity.v0;
+package com.nbos.capi.modules.identity.v0.models;
 
 
 public class SocialConnectUrlResponse {

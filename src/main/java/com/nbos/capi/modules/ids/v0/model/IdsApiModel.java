@@ -1,4 +1,4 @@
-package com.nbos.capi.modules.ids.v0;
+package com.nbos.capi.modules.ids.v0.model;
 
 /**
  * Created by vivekkiran on 6/17/16.

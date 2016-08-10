@@ -1,5 +1,7 @@
 package com.nbos.capi.api.v0;
 
+import com.nbos.capi.api.v0.models.TokenApiModel;
+
 import java.util.Map;
 
 /**

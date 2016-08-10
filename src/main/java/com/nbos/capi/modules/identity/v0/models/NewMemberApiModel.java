@@ -1,6 +1,6 @@
-package com.nbos.capi.modules.identity.v0;
+package com.nbos.capi.modules.identity.v0.models;
 
-import com.nbos.capi.api.v0.TokenApiModel;
+import com.nbos.capi.api.v0.models.TokenApiModel;
 
 public class NewMemberApiModel {
     public MemberApiModel getMember() {

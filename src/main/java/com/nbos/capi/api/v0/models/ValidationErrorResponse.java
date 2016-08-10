@@ -1,4 +1,6 @@
-package com.nbos.capi.api.v0;
+package com.nbos.capi.api.v0.models;
+
+import com.nbos.capi.api.v0.models.FieldErrorApiModel;
 
 import java.util.List;
 

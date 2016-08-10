@@ -1,5 +1,7 @@
 package com.nbos.capi.modules.ids.v0;
 
+import com.nbos.capi.modules.ids.v0.model.IdsApiModel;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;

@@ -1,5 +1,6 @@
 package com.nbos.capi.api.v0;
 
+import com.nbos.capi.api.v0.models.TokenApiModel;
 import com.nbos.capi.modules.identity.v0.IdentityApi;
 import com.nbos.capi.modules.ids.v0.IDS;
 

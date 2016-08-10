@@ -1,4 +1,4 @@
-package com.nbos.capi.modules.media.v0;
+package com.nbos.capi.modules.media.v0.models;
 
 /**
  * Created by vineeln on 5/21/16.

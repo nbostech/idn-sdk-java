@@ -1,10 +1,17 @@
 package com.nbos.capi.modules.identity.v0;
 
-import com.nbos.capi.api.v0.AbstractApiContext;
 import com.nbos.capi.api.v0.IdnCallback;
 import com.nbos.capi.api.v0.NetworkApi;
-import com.nbos.capi.api.v0.RestMessage;
-import com.nbos.capi.api.v0.TokenApiModel;
+import com.nbos.capi.api.v0.models.RestMessage;
+import com.nbos.capi.api.v0.models.TokenApiModel;
+import com.nbos.capi.modules.identity.v0.models.LoginModel;
+import com.nbos.capi.modules.identity.v0.models.MemberApiModel;
+import com.nbos.capi.modules.identity.v0.models.MemberSignupModel;
+import com.nbos.capi.modules.identity.v0.models.NewMemberApiModel;
+import com.nbos.capi.modules.identity.v0.models.ResetPasswordModel;
+import com.nbos.capi.modules.identity.v0.models.SocialConnectApiModel;
+import com.nbos.capi.modules.identity.v0.models.SocialConnectUrlResponse;
+import com.nbos.capi.modules.identity.v0.models.UpdatePasswordApiModel;
 
 import java.io.IOException;
 import java.util.Map;

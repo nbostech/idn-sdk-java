@@ -1,5 +1,7 @@
 package com.nbos.capi.api.v0;
 
+import com.nbos.capi.api.v0.models.ValidationErrorResponse;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 

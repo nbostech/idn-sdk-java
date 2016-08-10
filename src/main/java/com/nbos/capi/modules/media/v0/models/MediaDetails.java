@@ -1,4 +1,4 @@
-package com.nbos.capi.modules.media.v0;
+package com.nbos.capi.modules.media.v0.models;
 
 public class MediaDetails {
     private int width;
