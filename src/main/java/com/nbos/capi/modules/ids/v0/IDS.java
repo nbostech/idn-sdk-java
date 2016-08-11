@@ -37,6 +37,7 @@ public class IDS {
 
     static {
         try {
+            Class.forName("com.nbos.capi.modules.token.v0.TokenIdsRegistry");
             Class.forName("com.nbos.capi.modules.identity.v0.IdentityIdsRegistry");
             Class.forName("com.nbos.capi.modules.media.v0.MediaIdsRegistry");
         } catch (Exception x) {
