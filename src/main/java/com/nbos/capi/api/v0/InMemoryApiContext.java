@@ -56,9 +56,9 @@ public class InMemoryApiContext extends AbstractApiContext {
     }
 
     public TokenApiModel getUserToken(String moduleName) {
-        TokenApiModel tokenApiModel = (TokenApiModel) tokens.get(moduleName);
+        TokenApiModel tokenApiModel = tokens.get(moduleName);
         if (tokenApiModel == null) {
-            tokenApiModel = (TokenApiModel) tokens.get(".");
+            tokenApiModel = tokens.get(".");
         }
         return tokenApiModel;
     }

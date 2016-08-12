@@ -15,8 +15,7 @@ public class IdnSDK {
             apiContext.init();
         }
         try {
-            Class.forName("com.nbos.capi.modules.identity.v0.IdentityIdsRegistry");
-            Class.forName("com.nbos.capi.modules.media.v0.MediaIdsRegistry");
+
             Class.forName("com.nbos.capi.modules.token.v0.TokenIdsRegistry");
 
         } catch (Exception e) {
