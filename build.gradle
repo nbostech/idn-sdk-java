@@ -59,17 +59,17 @@ task apiClientDocs(type: Javadoc) {
 }
 
 task apiClientJar(type: Jar, dependsOn: [classes]) {
-    baseName = 'idn-java-api'
+    baseName = 'ids-sdk-java'
     from sourceSets.main.output
 }
 
 task apiClientSourceJar(type: Jar) {
-    baseName = 'idn-java-api-sources'
+    baseName = 'ids-sdk-java-sources'
     from(sourceSets.main.java)
 }
 
 task apiClientDocsJar(type: Jar, dependsOn: apiClientDocs) {
-    baseName = 'idn-java-api-javadoc'
+    baseName = 'ids-sdk-java-javadoc'
     from apiClientDocs.destinationDir
 }
 //
@@ -110,7 +110,7 @@ def appendDependencies = { pomNode ->
 publishing {
     publications {
         apiClient(MavenPublication) {
-            artifactId 'idn-java-api'
+            artifactId 'ids-sdk-java'
             artifact(apiClientJar) {
             }
             artifact(apiClientSourceJar) {
@@ -126,7 +126,7 @@ publishing {
                     extension = 'jar.asc'
                 }
             }
-            def signedPomFile = file("${project.projectDir}/build/idn-java-api-${version}.pom.asc")
+            def signedPomFile = file("${project.projectDir}/build/ids-sdk-java-${version}.pom.asc")
             if (signedPomFile) {
                 artifact(signedPomFile) {
                     classifier = null
