@@ -41,4 +41,23 @@ public class TokenApi extends NetworkApi {
         }
 
     }
+    public TokenApiModel refreshToken() {
+        final TokenRemoteApi remoteApi = getRemoteApi();
+
+        Map map = apiContext.getClientCredentials();
+        String clientId = (String) map.get("client_id");
+        // The following works.
+        Call<TokenApiModel> call = remoteApi.refreshAccessToken(clientId, "refresh_token",getClientToken().getRefresh_token() ,"read");
+        try {
+            Response<TokenApiModel> response = call.execute();
+            TokenApiModel tokenApiModel = response.body();
+            System.out.println("token:" + tokenApiModel.getAccess_token());
+            apiContext.setClientToken(tokenApiModel);
+            return tokenApiModel;
+        } catch (IOException x) {
+            System.out.println("Unable to get client token");
+            return null;
+        }
+
+    }
 }

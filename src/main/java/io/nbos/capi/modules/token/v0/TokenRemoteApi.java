@@ -19,6 +19,6 @@ public interface TokenRemoteApi {
     Call<TokenApiModel> getToken(@Field("client_id") String clientId, @Field("client_secret") String clientSecret, @Field("grant_type") String grantType);
 
     @POST(tokenUrl)
-    Call<TokenApiModel> refreshAccessToken(@Field("client_id") String clientId, @Field("client_secret") String clientSecret, @Field("grant_type") String grantType, @Field("refresh_token") String refreshToken);
+    Call<TokenApiModel> refreshAccessToken(@Field("client_id") String clientId,@Field("grant_type") String grantType, @Field("refresh_token") String refreshToken, @Field("scope") String scope);
 
 }

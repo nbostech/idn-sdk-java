@@ -2,8 +2,8 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-group 'in.wavelabs'
-version '0.3.0'
+group 'io.nbos'
+version '0.0.1'
 allprojects {
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
@@ -25,15 +25,15 @@ dependencies {
 ////
 model {
     tasks.generatePomFileForApiClientPublication {
-        destination = file("$buildDir/idn-java-api-${version}.pom")
+        destination = file("$buildDir/ids-sdk-java-${version}.pom")
     }
 }
 
 //
 //
 ext {
-    apiClientPomFile = file("${project.projectDir}/build/idn-java-api-${version}.pom")
-    signedApiClientPomFile = file("${project.projectDir}/build/idn-java-api-${version}.asc")
+    apiClientPomFile = file("${project.projectDir}/build/ids-sdk-java-${version}.pom")
+    signedApiClientPomFile = file("${project.projectDir}/build/ids-sdk-java-${version}.asc")
 }
 
 // avoids duplicates in a jar file
@@ -137,8 +137,8 @@ publishing {
                 def node = asNode()
                 node.children().last() + {
                     resolveStrategy = DELEGATE_FIRST
-                    name 'WaveLabs Java Client API'
-                    description 'description for project'
+                    name 'IDS Java SDK for NBOS.io'
+                    description 'Interface Discovery Service for NBOS.io'
                     url 'https://github.com/nbostech/wavelabs-java-client-api'
                     scm {
                         url 'https://github.com/nbostech/wavelabs-java-client-api'

@@ -9,7 +9,7 @@ import io.nbos.capi.modules.token.v0.TokenApi;
  */
 
 public class IdnSDK {
-    public static final void init(ApiContext apiContext) {
+    public static void init(ApiContext apiContext) {
         AbstractApiContext.registerApiContext(apiContext);
         if (apiContext != null) {
             apiContext.init();

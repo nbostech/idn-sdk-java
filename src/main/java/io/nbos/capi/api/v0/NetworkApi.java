@@ -2,7 +2,6 @@ package io.nbos.capi.api.v0;
 
 import java.io.IOException;
 
-import io.swagger.models.Swagger;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -36,7 +35,6 @@ public class NetworkApi {
 
     protected String moduleName;
     protected String host;
-    protected Swagger sw;
     protected ApiContext   apiContext;
 
     Class<?> remoteApiClass;
@@ -85,14 +83,6 @@ public class NetworkApi {
 
     public String getHost() {
         return host;
-    }
-
-    public Swagger getSw() {
-        return sw;
-    }
-
-    public void setSw(Swagger sw) {
-        this.sw = sw;
     }
 
     public Class<?> getRemoteApiClass() {
